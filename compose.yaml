@@ -1,0 +1,16 @@
+services:
+  papirus-ai-admin:
+    build:
+      context: .
+    container_name: papirus-ai-admin
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@host.docker.internal:5432/examengine}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      ADMIN_SESSION_SECRET: ${ADMIN_SESSION_SECRET:-local-dev-secret-change-me}
+      ADMIN_COOKIE_SECURE: ${ADMIN_COOKIE_SECURE:-false}
+      PORT: 7333
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "7333:7333"
+    restart: unless-stopped

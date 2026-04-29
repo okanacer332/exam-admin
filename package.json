@@ -1,0 +1,28 @@
+{
+  "name": "papirus-ai-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 7333",
+    "build": "prisma generate && next build",
+    "start": "next start -p 7333",
+    "lint": "eslint .",
+    "prisma:generate": "prisma generate",
+    "db:admin-schema": "prisma db execute --file db/admin-schema.sql --schema prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "next": "^16.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.4",
+    "prisma": "^6.19.3",
+    "typescript": "^6.0.3"
+  }
+}
