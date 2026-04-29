@@ -1,7 +1,7 @@
 # Papirus AI Admin
 
-Papirus AI Admin, ana uygulama ve landing projesinden bağımsız çalışan operasyon panelidir. Landing içeriği düzenlemez;
-kullanıcıları, oturumları, dosya/log akışını ve kredi hareketlerini izler.
+Papirus AI Admin, ana uygulama ve landing projesinden bağımsız çalışan yerel operasyon panelidir. Landing içeriği
+düzenlemez; kullanıcıları, oturumları, dosya/log akışını ve kredi hareketlerini izler.
 
 ## Ne Yapar?
 
@@ -35,7 +35,7 @@ npm run db:admin-schema
 npm run dev
 ```
 
-Uygulama `http://localhost:7333` adresinde açılır.
+Uygulama `http://localhost:3344` adresinde açılır.
 
 `db:admin-schema` yalnızca admin panelinin ihtiyaç duyduğu iki ek tabloyu oluşturur; ana Papirus AI tablolarını
 değiştirmez.

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 7333",
+    "dev": "next dev -p 3344",
     "build": "prisma generate && next build",
-    "start": "next start -p 7333",
+    "start": "next start -p 3344",
     "lint": "eslint .",
     "prisma:generate": "prisma generate",
     "db:admin-schema": "prisma db execute --file db/admin-schema.sql --schema prisma/schema.prisma"

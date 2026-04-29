@@ -19,7 +19,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV PORT=7333
+ENV PORT=3344
 
 RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
 
@@ -30,6 +30,6 @@ COPY --from=builder /app/.next/static ./.next/static
 
 USER nextjs
 
-EXPOSE 7333
+EXPOSE 3344
 
 CMD ["node", "server.js"]
