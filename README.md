@@ -35,7 +35,7 @@ npm run db:admin-schema
 npm run dev
 ```
 
-Uygulama `http://localhost:3344` adresinde açılır.
+Uygulama gerektiğinde `http://localhost:3344/yonetim` adresinde açılır.
 
 `db:admin-schema` yalnızca admin panelinin ihtiyaç duyduğu iki ek tabloyu oluşturur; ana Papirus AI tablolarını
 değiştirmez.
