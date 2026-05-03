@@ -20,17 +20,17 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
         <header className="admin-header">
           <div>
             <p className="eyebrow">Papirus AI Admin</p>
-            <h1>VeritabanÄ± baÄŸlantÄ±sÄ± bekleniyor.</h1>
-            <p>{errorMessage || "Dashboard verisi alÄ±namadÄ±."}</p>
+            <h1>Veritabanı bağlantısı bekleniyor.</h1>
+            <p>{errorMessage || "Dashboard verisi alınamadı."}</p>
           </div>
           <LogoutButton />
         </header>
         <section className="warning-card">
           <h2>Kurulum notu</h2>
           <p>
-            Admin paneli ana Papirus AI PostgreSQL veritabanÄ±na baÄŸlanÄ±r. `.env` iÃ§inde
-            <code> DATABASE_URL </code> tanÄ±mlandÄ±ktan sonra `npm run db:admin-schema` Ã§alÄ±ÅŸtÄ±rarak admin log
-            tablolarÄ±nÄ± oluÅŸtur.
+            Admin paneli ana Papirus AI PostgreSQL veritabanına bağlanır. `.env` içinde
+            <code> DATABASE_URL </code> tanımlandıktan sonra `npm run db:admin-schema` çalıştırarak admin log
+            tablolarını oluştur.
           </p>
         </section>
       </main>
@@ -42,33 +42,33 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
       <header className="admin-header">
         <div>
           <p className="eyebrow">Papirus AI Admin</p>
-          <h1>KullanÄ±cÄ±, kredi ve operasyon gÃ¶rÃ¼nÃ¼mÃ¼.</h1>
+          <h1>Kullanıcı, kredi ve operasyon görünümü.</h1>
           <p>Aktif oturum: {session.email}</p>
         </div>
         <LogoutButton />
       </header>
 
       <section className="metric-grid">
-        <MetricCard label="Toplam kullanÄ±cÄ±" value={formatNumber(data.totals.users)} />
-        <MetricCard label="DoÄŸrulanmÄ±ÅŸ e-posta" value={formatNumber(data.totals.verifiedUsers)} />
-        <MetricCard label=".edu.tr deneme adayÄ±" value={formatNumber(data.totals.activeTrialCandidates)} />
+        <MetricCard label="Toplam kullanıcı" value={formatNumber(data.totals.users)} />
+        <MetricCard label="Doğrulanmış e-posta" value={formatNumber(data.totals.verifiedUsers)} />
+        <MetricCard label=".edu.tr deneme adayı" value={formatNumber(data.totals.activeTrialCandidates)} />
         <MetricCard label="Toplam kredi bakiyesi" value={formatNumber(data.totals.credits)} />
       </section>
 
       <section className="panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Plan kararÄ±</p>
-            <h2>Deneme kotasÄ±nÄ± kontrollÃ¼ tutuyoruz.</h2>
+            <p className="eyebrow">Plan kararı</p>
+            <h2>Deneme kotasını kontrollü tutuyoruz.</h2>
           </div>
-          <span className="pill">Ã–neri: 15 kredi</span>
+          <span className="pill">Öneri: 15 kredi</span>
         </div>
         <div className="plan-grid">
           {productPlans.map((plan) => (
             <article className="plan-card" key={plan.code}>
               <span>{plan.name}</span>
               <h3>{plan.price}</h3>
-              <p>{plan.period} Â· {formatNumber(plan.credits)} kredi Â· {plan.userLimit}</p>
+              <p>{plan.period} · {formatNumber(plan.credits)} kredi · {plan.userLimit}</p>
               <small>{plan.positioning}</small>
               <ul>
                 {plan.guardrails.map((guardrail) => (
@@ -89,20 +89,20 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
       <section className="panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">KullanÄ±cÄ±lar</p>
-            <h2>Kredi tanÄ±mlama ve hesap ayrÄ±ntÄ±larÄ±.</h2>
+            <p className="eyebrow">Kullanıcılar</p>
+            <h2>Kredi tanımlama ve hesap ayrıntıları.</h2>
           </div>
         </div>
         <div className="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>KullanÄ±cÄ±</th>
-                <th>Ãœniversite / BÃ¶lÃ¼m</th>
+                <th>Kullanıcı</th>
+                <th>Üniversite / Bölüm</th>
                 <th>Plan</th>
                 <th>Kredi</th>
                 <th>Dosya</th>
-                <th>KayÄ±t</th>
+                <th>Kayıt</th>
                 <th>Operasyon</th>
               </tr>
             </thead>
@@ -118,7 +118,7 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
                     <span>{getSettingValue(user.settings, "profile_department")}</span>
                   </td>
                   <td>
-                    <strong>{user.membershipPlan || "deneme / plansÄ±z"}</strong>
+                    <strong>{user.membershipPlan || "deneme / plansız"}</strong>
                     <span>{formatDate(user.membershipExpiresAt)}</span>
                   </td>
                   <td>
@@ -150,7 +150,7 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
           {data.recentFiles.map((file) => (
             <LogItem
               key={file.id}
-              meta={`${file.user.email} Â· ${formatDate(file.createdAt)}`}
+              meta={`${file.user.email} · ${formatDate(file.createdAt)}`}
               title={file.filename}
               value={file.path}
             />
@@ -161,7 +161,7 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
           {data.recentSessions.map((sessionItem) => (
             <LogItem
               key={sessionItem.id}
-              meta={`${sessionItem.user.email} Â· ${formatDate(sessionItem.updatedAt)}`}
+              meta={`${sessionItem.user.email} · ${formatDate(sessionItem.updatedAt)}`}
               title={sessionItem.ipAddress || "IP yok"}
               value={sessionItem.userAgent || "User agent yok"}
             />
@@ -170,13 +170,13 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
       </section>
 
       <section className="split-grid">
-        <LogPanel title="Ä°ÅŸlem progress loglarÄ±">
+        <LogPanel title="İşlem progress logları">
           {data.recentProgress.map((progress) => (
             <LogItem
               key={progress.id}
-              meta={`${progress.user.email} Â· ${formatDate(progress.createdAt)}`}
+              meta={`${progress.user.email} · ${formatDate(progress.createdAt)}`}
               title={progress.type}
-              value={`${progress.current}/${progress.total} Â· %${getProgressPercent(progress.current, progress.total)}`}
+              value={`${progress.current}/${progress.total} · %${getProgressPercent(progress.current, progress.total)}`}
             />
           ))}
         </LogPanel>
@@ -185,9 +185,9 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
           {data.creditEvents.map((event) => (
             <LogItem
               key={event.id}
-              meta={`${event.user.email} Â· ${formatDate(event.createdAt)}`}
-              title={`${event.action} Â· ${event.amount}`}
-              value={`${event.previousBalance} â†’ ${event.newBalance}${event.note ? ` Â· ${event.note}` : ""}`}
+              meta={`${event.user.email} · ${formatDate(event.createdAt)}`}
+              title={`${event.action} · ${event.amount}`}
+              value={`${event.previousBalance} → ${event.newBalance}${event.note ? ` · ${event.note}` : ""}`}
             />
           ))}
         </LogPanel>
@@ -196,8 +196,8 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
       <section className="panel">
         <div className="panel-heading">
           <div>
-            <p className="eyebrow">Faz planÄ±</p>
-            <h2>Yeni feature yol haritasÄ±.</h2>
+            <p className="eyebrow">Faz planı</p>
+            <h2>Yeni feature yol haritası.</h2>
           </div>
         </div>
         <div className="phase-grid">
@@ -215,14 +215,14 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
         <div className="panel-heading">
           <div>
             <p className="eyebrow">Admin audit</p>
-            <h2>Panel iÃ§i kritik iÅŸlemler.</h2>
+            <h2>Panel içi kritik işlemler.</h2>
           </div>
         </div>
         <div className="log-list">
           {data.auditLogs.map((log) => (
             <LogItem
               key={log.id}
-              meta={`${log.admin} Â· ${formatDate(log.createdAt)}`}
+              meta={`${log.admin} · ${formatDate(log.createdAt)}`}
               title={log.action}
               value={log.target || "genel"}
             />

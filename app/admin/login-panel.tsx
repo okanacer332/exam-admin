@@ -22,7 +22,7 @@ export function LoginPanel() {
 
     if (!response.ok) {
       const body = (await response.json().catch(() => null)) as { message?: string } | null;
-      setMessage(body?.message || "GiriÅŸ yapÄ±lamadÄ±.");
+      setMessage(body?.message || "Giriş yapılamadı.");
       setIsBusy(false);
       return;
     }
@@ -35,23 +35,23 @@ export function LoginPanel() {
       <section className="login-card">
         <div>
           <p className="eyebrow">Papirus AI Admin</p>
-          <h1>Operasyon paneline giriÅŸ yap.</h1>
+          <h1>Operasyon paneline giriş yap.</h1>
           <p>
-            Bu panel landing iÃ§erik dÃ¼zenlemez. KullanÄ±cÄ±, log, kredi ve paket operasyonunu izler.
-            GeliÅŸtirme ÅŸifresi <strong>admin123</strong>; canlÄ±da ortam deÄŸiÅŸkeniyle deÄŸiÅŸtirilecek.
+            Bu panel landing içerik düzenlemez. Kullanıcı, log, kredi ve paket operasyonunu izler.
+            Geliştirme şifresi <strong>admin123</strong>; canlıda ortam değişkeniyle değiştirilecek.
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="password">Admin ÅŸifresi</label>
+          <label htmlFor="password">Admin şifresi</label>
           <input
             id="password"
             onChange={(event) => setPassword(event.target.value)}
-            placeholder="Åifre"
+            placeholder="Şifre"
             type="password"
             value={password}
           />
           <button disabled={isBusy} type="submit">
-            {isBusy ? "Kontrol ediliyor..." : "GiriÅŸ yap"}
+            {isBusy ? "Kontrol ediliyor..." : "Giriş yap"}
           </button>
           {message ? <p className="form-message">{message}</p> : null}
         </form>

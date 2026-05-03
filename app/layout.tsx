@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Papirus AI Admin | Operasyon Paneli",
-  description: "Papirus AI kullanÄ±cÄ±, kredi, log ve paket operasyon paneli.",
+  description: "Papirus AI kullanıcı, kredi, log ve paket operasyon paneli.",
 };
 
 export default function RootLayout({
