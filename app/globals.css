@@ -129,6 +129,31 @@ select:focus {
   gap: 14px;
 }
 
+.login-step {
+  background: rgba(237, 247, 241, 0.05);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  padding: 6px;
+}
+
+.login-step span {
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 950;
+  padding: 8px 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.login-step span.active {
+  background: var(--accent);
+  color: #06100b;
+}
+
 label {
   color: var(--muted);
   font-size: 0.84rem;

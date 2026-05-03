@@ -24,7 +24,9 @@ ENV PORT=3344
 RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
 
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/db ./db
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
@@ -32,4 +34,4 @@ USER nextjs
 
 EXPOSE 3344
 
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "node scripts/ensure-admin-schema.mjs && node server.js"]

@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 
 export const ADMIN_COOKIE_NAME = "exam_admin_session";
 const SESSION_MAX_AGE = 60 * 60 * 8;
+const CHALLENGE_MAX_AGE = 60 * 5;
 
 function getSessionSecret() {
   return process.env.ADMIN_SESSION_SECRET || "dev-only-exam-admin-secret";
@@ -24,23 +25,36 @@ function safeCompare(left: string, right: string) {
 }
 
 export function isValidAdminPassword(password: string) {
-  const expectedPassword = process.env.ADMIN_PASSWORD || "admin123";
+  const expectedPassword = process.env.ADMIN_PASSWORD || "";
   return safeCompare(password, expectedPassword);
 }
 
-export function createAdminSessionToken() {
+export function isValidAdminChallengeAnswer(answer: string) {
+  const expectedAnswer = process.env.ADMIN_CHALLENGE_ANSWER || "";
+  return safeCompare(answer.trim(), expectedAnswer);
+}
+
+function createSignedToken(role: "admin" | "admin_challenge", maxAge: number) {
   const payload = Buffer.from(
     JSON.stringify({
-      role: "admin",
+      role,
       email: "local-admin",
-      expiresAt: Date.now() + SESSION_MAX_AGE * 1000,
+      expiresAt: Date.now() + maxAge * 1000,
     }),
   ).toString("base64url");
 
   return `${payload}.${sign(payload)}`;
 }
 
-export function verifyAdminSessionToken(token?: string) {
+export function createAdminChallengeToken() {
+  return createSignedToken("admin_challenge", CHALLENGE_MAX_AGE);
+}
+
+export function createAdminSessionToken() {
+  return createSignedToken("admin", SESSION_MAX_AGE);
+}
+
+function verifySignedToken(token: string | undefined, expectedRole: "admin" | "admin_challenge") {
   if (!token) {
     return null;
   }
@@ -58,7 +72,7 @@ export function verifyAdminSessionToken(token?: string) {
       expiresAt?: number;
     };
 
-    if (parsed.role !== "admin" || typeof parsed.expiresAt !== "number" || parsed.expiresAt <= Date.now()) {
+    if (parsed.role !== expectedRole || typeof parsed.expiresAt !== "number" || parsed.expiresAt <= Date.now()) {
       return null;
     }
 
@@ -68,6 +82,14 @@ export function verifyAdminSessionToken(token?: string) {
   } catch {
     return null;
   }
+}
+
+export function verifyAdminChallengeToken(token?: string) {
+  return verifySignedToken(token, "admin_challenge");
+}
+
+export function verifyAdminSessionToken(token?: string) {
+  return verifySignedToken(token, "admin");
 }
 
 export async function getAdminSession() {

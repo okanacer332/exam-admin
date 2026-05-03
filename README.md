@@ -44,12 +44,15 @@ değiştirmez.
 
 ```bash
 DATABASE_URL="postgresql://..."
+ADMIN_CHALLENGE_ANSWER="ilk-adim-cevabi"
 ADMIN_PASSWORD="guclu-bir-sifre"
 ADMIN_SESSION_SECRET="uzun-rastgele-bir-secret"
 ADMIN_COOKIE_SECURE="false"
 ```
 
 Canlı HTTPS ortamında `ADMIN_COOKIE_SECURE="true"` kullanılmalıdır.
+Admin girişinde önce güvenlik sorusu, sonra admin şifresi sorulur. Bu değerleri repoya yazma; yalnızca lokal `.env`
+dosyasında tut.
 
 ## Docker
 
@@ -57,8 +60,11 @@ Canlı HTTPS ortamında `ADMIN_COOKIE_SECURE="true"` kullanılmalıdır.
 docker compose up --build
 ```
 
-Docker için `DATABASE_URL` ortam değişkeni verilmelidir. Lokal Docker Desktop ortamında varsayılan bağlantı
-`host.docker.internal:5432` üzerinden ana Papirus AI PostgreSQL container'ına gider.
+Docker için `.env` içinde `DATABASE_URL`, `ADMIN_CHALLENGE_ANSWER`, `ADMIN_PASSWORD` ve `ADMIN_SESSION_SECRET`
+tanımlı olmalıdır. Lokal Docker Desktop ortamında varsayılan bağlantı `host.docker.internal:5432/papirus_ai` üzerinden
+ana Papirus AI PostgreSQL container'ına gider.
+
+Container açılırken `db/admin-schema.sql` otomatik çalıştırılır ve admin log tabloları yoksa oluşturulur.
 
 ## Faz Planı
 
