@@ -7,4 +7,5 @@ out
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+admin-dev.log
 .DS_Store

@@ -5,16 +5,18 @@ import { AdminTabs, type AdminTab } from "./admin-tabs";
 import { CreditControl } from "./credit-control";
 import { LogoutButton } from "./logout-button";
 import { PlanControl } from "./plan-control";
+import { UserSearch } from "./user-search";
 
 type AdminDashboardProps = {
   data?: DashboardData;
   errorMessage: string;
+  searchQuery: string;
   session: {
     email: string;
   };
 };
 
-export function AdminDashboard({ data, errorMessage, session }: AdminDashboardProps) {
+export function AdminDashboard({ data, errorMessage, searchQuery, session }: AdminDashboardProps) {
   if (errorMessage || !data) {
     return (
       <main className="admin-shell">
@@ -118,7 +120,13 @@ export function AdminDashboard({ data, errorMessage, session }: AdminDashboardPr
             <div>
               <p className="eyebrow">Kullanıcılar</p>
               <h2>Kredi tanımlama ve hesap ayrıntıları.</h2>
+              <p className="panel-note">
+                {searchQuery
+                  ? `"${searchQuery}" için ${formatNumber(data.users.length)} kullanıcı listeleniyor.`
+                  : "Son 100 kullanıcı listeleniyor. E-posta veya ad ile canlı veride arama yapabilirsiniz."}
+              </p>
             </div>
+            <UserSearch initialQuery={searchQuery} />
           </div>
           <div className="table-wrap">
             <table>

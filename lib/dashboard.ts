@@ -1,6 +1,26 @@
 import { prisma } from "@/lib/prisma";
 
-export async function getDashboardData() {
+export async function getDashboardData(searchQuery = "") {
+  const cleanSearchQuery = searchQuery.trim();
+  const userWhere = cleanSearchQuery
+    ? {
+        OR: [
+          {
+            email: {
+              contains: cleanSearchQuery,
+              mode: "insensitive" as const,
+            },
+          },
+          {
+            name: {
+              contains: cleanSearchQuery,
+              mode: "insensitive" as const,
+            },
+          },
+        ],
+      }
+    : undefined;
+
   const [
     users,
     totalUsers,
@@ -13,8 +33,9 @@ export async function getDashboardData() {
     auditLogs,
   ] = await Promise.all([
     prisma.user.findMany({
+      where: userWhere,
       orderBy: { createdAt: "desc" },
-      take: 25,
+      take: 100,
       include: {
         settings: {
           where: {

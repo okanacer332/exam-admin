@@ -3,6 +3,8 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
+type CreditMode = "add" | "subtract" | "set";
+
 type CreditControlProps = {
   userId: string;
   currentBalance: number;
@@ -10,7 +12,7 @@ type CreditControlProps = {
 
 export function CreditControl({ userId, currentBalance }: CreditControlProps) {
   const router = useRouter();
-  const [mode, setMode] = useState<"add" | "set">("add");
+  const [mode, setMode] = useState<CreditMode>("add");
   const [amount, setAmount] = useState("15");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState("");
@@ -47,8 +49,9 @@ export function CreditControl({ userId, currentBalance }: CreditControlProps) {
   return (
     <form className="credit-form" onSubmit={handleSubmit}>
       <span>Mevcut: {currentBalance}</span>
-      <select value={mode} onChange={(event) => setMode(event.target.value as "add" | "set")}>
+      <select value={mode} onChange={(event) => setMode(event.target.value as CreditMode)}>
         <option value="add">Ekle</option>
+        <option value="subtract">Eksilt</option>
         <option value="set">Ayarla</option>
       </select>
       <input min="0" max="100000" onChange={(event) => setAmount(event.target.value)} type="number" value={amount} />

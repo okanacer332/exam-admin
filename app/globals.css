@@ -405,6 +405,12 @@ code {
   margin: 0;
 }
 
+.panel-note {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 10px 0 0;
+}
+
 .pill {
   background: rgba(88, 214, 141, 0.13);
   border: 1px solid rgba(88, 214, 141, 0.28);
@@ -508,6 +514,17 @@ td span {
   display: grid;
   gap: 10px;
   min-width: 560px;
+}
+
+.user-search {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: minmax(260px, 1fr) auto auto;
+  min-width: min(100%, 520px);
+}
+
+.user-search input {
+  min-width: 0;
 }
 
 .credit-form,
@@ -633,5 +650,10 @@ td span {
 
   .log-item {
     grid-template-columns: 1fr;
+  }
+
+  .user-search {
+    grid-template-columns: 1fr;
+    min-width: 100%;
   }
 }
