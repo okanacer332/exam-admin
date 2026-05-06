@@ -13,7 +13,7 @@ type CreditControlProps = {
 export function CreditControl({ userId, currentBalance }: CreditControlProps) {
   const router = useRouter();
   const [mode, setMode] = useState<CreditMode>("add");
-  const [amount, setAmount] = useState("15");
+  const [amount, setAmount] = useState("5");
   const [note, setNote] = useState("");
   const [message, setMessage] = useState("");
   const [isBusy, setIsBusy] = useState(false);

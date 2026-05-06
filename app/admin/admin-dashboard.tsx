@@ -1,6 +1,6 @@
 ﻿import type { DashboardData } from "@/lib/dashboard";
 import { formatDate, formatNumber, getProgressPercent, getSettingValue } from "@/lib/format";
-import { productPlans, roadmapPhases, topUpPlan } from "@/lib/plans";
+import { productPlans, roadmapPhases } from "@/lib/plans";
 import { AdminTabs, type AdminTab } from "./admin-tabs";
 import { CreditControl } from "./credit-control";
 import { LogoutButton } from "./logout-button";
@@ -54,7 +54,7 @@ export function AdminDashboard({ data, errorMessage, searchQuery, session }: Adm
       label: "Kullanıcılar",
     },
     {
-      badge: formatNumber(productPlans.length + 1),
+      badge: formatNumber(productPlans.length),
       hint: "Paket ve kota yapısı",
       id: "plans",
       label: "Paketler",
@@ -186,7 +186,7 @@ export function AdminDashboard({ data, errorMessage, searchQuery, session }: Adm
               <p className="eyebrow">Paketler</p>
               <h2>Deneme kotasını kontrollü tutuyoruz.</h2>
             </div>
-            <span className="pill">Öneri: 15 kredi</span>
+            <span className="pill">Canlı: 5 kredi</span>
           </div>
           <div className="plan-grid">
             {productPlans.map((plan) => (
@@ -202,12 +202,6 @@ export function AdminDashboard({ data, errorMessage, searchQuery, session }: Adm
                 </ul>
               </article>
             ))}
-            <article className="plan-card topup">
-              <span>{topUpPlan.name}</span>
-              <h3>{topUpPlan.price}</h3>
-              <p>{formatNumber(topUpPlan.credits)} kredi</p>
-              <small>{topUpPlan.positioning}</small>
-            </article>
           </div>
         </section>
 

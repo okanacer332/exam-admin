@@ -14,14 +14,17 @@ düzenlemez; kullanıcıları, oturumları, dosya/log akışını ve kredi harek
 
 ## Önerilen Deneme Kotası
 
-50 kağıt yerine 15 kağıt önerildi:
+Ücretsiz deneme kotası canlı ürün diliyle 5 kağıt olarak sabitlendi:
 
 - 1 sınav
 - 1 referans kağıdı
-- 15 öğrenci kağıdı
+- 5 öğrenci kağıdı
 - 14 gün süre
 - Kredi kartı yok
 - `.edu.tr` veya admin onaylı akademik alan adı
+
+Mevcut canlı kullanıcıların daha önce atanmış paket, bitiş tarihi ve kredi bakiyeleri otomatik olarak değiştirilmez.
+Admin panelindeki paket sabitleri yalnızca yeni paket atama işleminde uygulanır.
 
 Bu sınır, gerçek el yazısı örnekleriyle güven oluşturmak için yeterlidir ve erken maliyet/suistimal riskini azaltır.
 

@@ -6,8 +6,11 @@ export const runtime = "nodejs";
 
 const allowedPlans = {
   poc: "Proof of Concept",
-  individual: "Bireysel Akademisyen",
-  team: "Kürsü / Asistan Grubu",
+  "paper-350": "Başlangıç Paketi",
+  "paper-1000": "Akademik Paket",
+  "paper-5000": "Kurumsal Paket",
+  individual: "Eski Bireysel Paket",
+  team: "Eski Kürsü / Asistan Grubu",
 } as const;
 
 type RouteContext = {

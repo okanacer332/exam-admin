@@ -12,7 +12,10 @@ type PlanControlProps = {
 };
 
 const defaultsByPlan: Record<string, { credits: number; days: number }> = {
-  poc: { credits: 15, days: 14 },
+  poc: { credits: 5, days: 14 },
+  "paper-350": { credits: 350, days: 365 },
+  "paper-1000": { credits: 1000, days: 365 },
+  "paper-5000": { credits: 5000, days: 365 },
   individual: { credits: 1500, days: 365 },
   team: { credits: 6000, days: 365 },
 };
@@ -29,9 +32,10 @@ function defaultExpiresAt(planCode: string) {
 
 export function PlanControl({ userId, currentPlan, currentCredits, currentExpiresAt }: PlanControlProps) {
   const router = useRouter();
-  const initialPlan = defaultsByPlan[currentPlan || ""] ? currentPlan || "poc" : "poc";
+  const isKnownCurrentPlan = Boolean(currentPlan && defaultsByPlan[currentPlan]);
+  const initialPlan = isKnownCurrentPlan ? currentPlan || "poc" : "poc";
   const [planCode, setPlanCode] = useState(initialPlan);
-  const [credits, setCredits] = useState(String(defaultsByPlan[initialPlan]?.credits ?? currentCredits));
+  const [credits, setCredits] = useState(String(currentCredits));
   const [expiresAt, setExpiresAt] = useState(
     currentExpiresAt ? toDateInputValue(new Date(currentExpiresAt)) : defaultExpiresAt(initialPlan),
   );
@@ -40,9 +44,17 @@ export function PlanControl({ userId, currentPlan, currentCredits, currentExpire
   const [isBusy, setIsBusy] = useState(false);
 
   const selectedPlan = useMemo(() => productPlans.find((plan) => plan.code === planCode), [planCode]);
+  const shouldShowLegacyCurrentPlan = Boolean(
+    currentPlan && !productPlans.some((plan) => plan.code === currentPlan) && defaultsByPlan[currentPlan],
+  );
 
   function handlePlanChange(nextPlanCode: string) {
     setPlanCode(nextPlanCode);
+    if (nextPlanCode === currentPlan && shouldShowLegacyCurrentPlan) {
+      setCredits(String(currentCredits));
+      setExpiresAt(currentExpiresAt ? toDateInputValue(new Date(currentExpiresAt)) : defaultExpiresAt(nextPlanCode));
+      return;
+    }
     setCredits(String(defaultsByPlan[nextPlanCode]?.credits ?? 0));
     setExpiresAt(defaultExpiresAt(nextPlanCode));
   }
@@ -82,6 +94,9 @@ export function PlanControl({ userId, currentPlan, currentCredits, currentExpire
         Mevcut: {currentPlan || "plansız"} / {currentCredits}
       </span>
       <select value={planCode} onChange={(event) => handlePlanChange(event.target.value)}>
+        {shouldShowLegacyCurrentPlan ? (
+          <option value={currentPlan || ""}>Mevcut eski plan: {currentPlan}</option>
+        ) : null}
         {productPlans.map((plan) => (
           <option key={plan.code} value={plan.code}>
             {plan.name}

@@ -15,54 +15,64 @@ export const productPlans: ProductPlan[] = [
     name: "Proof of Concept",
     price: "Ücretsiz",
     period: "14 gün",
-    credits: 15,
+    credits: 5,
     userLimit: "1 kurumsal e-posta",
-    positioning: "Güven kancası. Kredi kartı istemeden akademisyene kendi gerçek kağıdıyla 'aha' anını yaşatır.",
+    positioning: "Kredi kartı istemeden akademisyene kendi gerçek kağıdıyla hızlı güven anını yaşatır.",
     guardrails: [
       "Sadece .edu.tr veya admin tarafından onaylanmış akademik alan adı.",
-      "1 sınav, 1 referans kağıdı ve en fazla 15 öğrenci kağıdı.",
+      "1 sınav, 1 referans kağıdı ve en fazla 5 öğrenci kağıdı.",
       "Referans kağıdı ve başarısız OCR retry işlemleri kredi yakmamalı.",
       "Deneme sonunda export kapatılabilir, ama sonuç ekranı açık kalmalı.",
     ],
   },
   {
-    code: "individual",
-    name: "Bireysel Akademisyen / Asistan",
-    price: "10.000 TL",
-    period: "Yıl",
-    credits: 1500,
+    code: "paper-350",
+    name: "Başlangıç Paketi",
+    price: "1.999 TL",
+    period: "Paket",
+    credits: 350,
     userLimit: "1 kullanıcı",
-    positioning: "Odak ürün. Bir hocanın veya asistanın kişisel bütçeyle satın alabileceği net paket.",
+    positioning: "Tek ders, küçük sınıf veya ilk düzenli kullanım için erişilebilir başlangıç paketi.",
     guardrails: [
-      "Aynı anda tek aktif oturum, fakat iki kayıtlı cihaz toleransı.",
-      "Bölüm bilgisi segmentasyon için tutulmalı; ilk fazda sert kısıt olmamalı.",
-      "Yıllık kullanımda aylık 1.000 TL algısını kıran indirimli ana teklif.",
+      "350 kağıt okuma kredisi.",
+      "Soru bazlı değerlendirme ve sınav arşivi.",
+      "Gmail ile güvenli konsol girişi.",
     ],
   },
   {
-    code: "team",
-    name: "Kürsü / Asistan Grubu",
-    price: "35.000 TL",
-    period: "Yıl",
-    credits: 6000,
-    userLimit: "1 hoca + 3 asistan",
-    positioning: "Kurumsal satıştan önce bölüm içi ekip kullanımını yakalayan ara paket.",
+    code: "paper-1000",
+    name: "Akademik Paket",
+    price: "4.999 TL",
+    period: "Paket",
+    credits: 1000,
+    userLimit: "Akademisyen / ekip",
+    positioning: "Yoğun sınav dönemlerinde daha yüksek hacimli değerlendirme yapan akademik ekipler için.",
     guardrails: [
-      "Ortak kredi havuzu.",
-      "Alt kullanıcıların yetkileri hoca/admin tarafından yönetilmeli.",
-      "Kullanım raporu ve kredi tüketimi hoca ekranında görünmeli.",
+      "1.000 kağıt okuma kredisi.",
+      "Rubrik bazlı karşılaştırma.",
+      "Sınıf performans özeti.",
+    ],
+  },
+  {
+    code: "paper-5000",
+    name: "Kurumsal Paket",
+    price: "19.999 TL",
+    period: "Paket",
+    credits: 5000,
+    userLimit: "Bölüm / fakülte",
+    positioning: "Bölüm, fakülte ve yüksek hacimli akademik operasyonlar için.",
+    guardrails: [
+      "5.000 kağıt okuma kredisi.",
+      "Kurum ölçeğinde kullanım.",
+      "Öncelikli destek.",
     ],
   },
 ];
 
-export const topUpPlan = {
-  code: "topup-500",
-  name: "+500 Kağıt Ek Paket",
-  price: "3.500 TL",
-  credits: 500,
-  positioning:
-    "Yoğun kullanıcıyı tüm paketi yeniden satın almaya zorlamadan gelir artırır. Taban fiyatı ulaşılabilir tutar.",
-};
+export const legacyPlanCodes = {
+  individual: "Eski Bireysel Paket",
+  team: "Eski Kürsü / Asistan Grubu",
+} as const;
 
 export const roadmapPhases = [
   {
@@ -73,12 +83,12 @@ export const roadmapPhases = [
   {
     phase: "Faz 1",
     title: "Deneme ve kredi kapısı",
-    outcome: ".edu.tr kayıt, 1 sınav/15 kağıt deneme kotası, kredi düşme ve limit uyarıları ana uygulamaya eklenir.",
+    outcome: ".edu.tr kayıt, 1 sınav/5 kağıt deneme kotası, kredi düşme ve limit uyarıları ana uygulamaya eklenir.",
   },
   {
     phase: "Faz 2",
-    title: "Paket ve top-up satışı",
-    outcome: "Bireysel, ekip ve ek kredi paketleri ödeme altyapısına bağlanır; admin tüm hareketleri izler.",
+    title: "Paket satışı",
+    outcome: "Başlangıç, Akademik ve Kurumsal paketleri ödeme altyapısına bağlanır; admin tüm hareketleri izler.",
   },
   {
     phase: "Faz 3",
